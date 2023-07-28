@@ -1,55 +1,15 @@
+package com.example.myproject;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    // 기본 사람 클래스
-    class Person {
-        String name;
-        int age;
-    }
-
-    // 주인공
-    class Jinuk extends Person {
-        String job;
-        String MBTI;
-
-        Jinuk(String name, int age, String job, String MBTI) {
-            this.name = name;
-            this.age = age;
-            this.job = job;
-            this.MBTI = MBTI;
-        }
-
-        void introduce() {
-            System.out.println("이름: " + name);
-            System.out.println("나이: " + age);
-            System.out.println("직업: " + job);
-            System.out.println("MBTI: " + MBTI);
-        }
-    }
-
-    // 여자친구 클래스
-    class girlFriend extends Jinuk {
-        int like;
-
-        girlFriend(String name, int age, String job, String MBTI, int like) {
-            super(name, age, job, MBTI); // Jinuk의 생성자 호출
-            this.like = like;
-        }
-
-        void increaseLike(int amount) {
-            like += amount;
-        }
-    }
-
-    // 여자친구 인스턴스들을 저장할 ArrayList 선언
-    ArrayList<girlFriend> girlFriendsList = new ArrayList<>();
+    ArrayList<GirlFriend> girlFriendsList = new ArrayList<>();
 
     public Main() {
-        // 여자친구 인스턴스들 추가
-        girlFriendsList.add(new girlFriend("미숙", 38, "교사", "ISFP", 0));
-        girlFriendsList.add(new girlFriend("옥자", 40, "카페사장", "ESFJ", 0));
-        girlFriendsList.add(new girlFriend("숙자", 41, "학원강사", "ENFP", 0));
+        girlFriendsList.add(new GirlFriend("미숙", 38, "교사", "ISFP", 0));
+        girlFriendsList.add(new GirlFriend("옥자", 40, "카페사장", "ESFJ", 0));
+        girlFriendsList.add(new GirlFriend("숙자", 41, "학원강사", "ENFP", 0));
     }
 
     public void printGirlFriendList() {
@@ -59,7 +19,7 @@ public class Main {
         System.out.printf(format, "번호", "이름", "직업", "MBTI", "호감도");
         System.out.println();
         for (int i = 0; i < girlFriendsList.size(); i++) {
-            girlFriend gf = girlFriendsList.get(i);
+            GirlFriend gf = girlFriendsList.get(i);
             System.out.printf(format, (i + 1) + ".", gf.name, gf.job, gf.MBTI, gf.like);
             System.out.println();
         }
@@ -81,8 +41,8 @@ public class Main {
         return choice;
     }
 
-    public girlFriend selectGirlFriend(Scanner scanner) {
-        girlFriend selectedGirlFriend = null;
+    public GirlFriend selectGirlFriend(Scanner scanner) {
+        GirlFriend selectedGirlFriend = null;
         boolean validGirlFriend = false;
 
         while (!validGirlFriend) {
@@ -102,7 +62,7 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        Jinuk jinuk = main.new Jinuk("진욱", 40, "개발자", "ENTP");
+        Jinuk jinuk = new Jinuk("진욱", 40, "개발자", "ENTP");
         System.out.println("\n나는 SOLO에 오신 걸 환영합니다!!");
         System.out.println("당신은 결혼을 하기 위해 이 프로그램에 출연 했습니다");
         System.out.println("매번 이벤트가 있기 전에 여성 한 명을 고를 수 있고 선택지에 따라서 여성의 호감도가 오릅니다");
@@ -114,7 +74,7 @@ public class Main {
 
         // 선택지를 입력받아 호감도를 증가시키는 부분
         Scanner scanner = new Scanner(System.in);
-        girlFriend selectedGirlFriend = main.selectGirlFriend(scanner);
+        GirlFriend selectedGirlFriend = main.selectGirlFriend(scanner);
 
         String[] choices = {
                 "언제까지 그렇게 재실 건가요",
@@ -138,7 +98,7 @@ public class Main {
         main.printGirlFriendList();
 
         // 두 번째 선택을 하기
-        girlFriend secondSelectedGirlFriend = main.selectGirlFriend(scanner);
+        GirlFriend secondSelectedGirlFriend = main.selectGirlFriend(scanner);
 
         String[] secondChoices = {
                 "쿵할게요",
@@ -162,7 +122,7 @@ public class Main {
         main.printGirlFriendList();
 
         // 세 번째 선택을 하기
-        girlFriend thirdSelectedGirlFriend = main.selectGirlFriend(scanner);
+        GirlFriend thirdSelectedGirlFriend = main.selectGirlFriend(scanner);
 
         String[] thirdChoices = {
                 "파스타나 만들어 먹자",
@@ -187,10 +147,10 @@ public class Main {
 
         // 호감도가 100이 된 상대가 있는지 확인하고, 게임 종료 또는 최종 선택 진행
         boolean marriageSuccess = false;
-        for (girlFriend gf : main.girlFriendsList) {
+        for (GirlFriend gf : main.girlFriendsList) {
             if (gf.like >= 100) {
                 marriageSuccess = true;
-                System.out.println("\n축하합니다!\n나 김진욱은! 40 넘어서 미친 사랑을 하게 해준 "+gf.name+"을(를) 최종 선택하겠습니다!!");
+                System.out.println("\n축하합니다!\n나 김진욱은! 40 넘어서 미친 사랑을 하게 해준 "+gf.name + "을(를) 최종 선택하겠습니다!!");
                 System.out.println("나! 너 때문에 미칠것 같다!!! 나랑 살자!!!");
                 break;
             }
