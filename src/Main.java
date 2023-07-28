@@ -47,7 +47,7 @@ public class Main {
 
     public Main() {
         // 여자친구 인스턴스들 추가
-        girlFriendsList.add(new girlFriend("정숙", 38, "교사", "ISFP", 0));
+        girlFriendsList.add(new girlFriend("미숙", 38, "교사", "ISFP", 0));
         girlFriendsList.add(new girlFriend("옥자", 40, "카페사장", "ESFJ", 0));
         girlFriendsList.add(new girlFriend("숙자", 41, "학원강사", "ENFP", 0));
     }
@@ -190,7 +190,7 @@ public class Main {
         for (girlFriend gf : main.girlFriendsList) {
             if (gf.like >= 100) {
                 marriageSuccess = true;
-                System.out.println("\n축하합니다!\n나 김진욱은! 40 넘어서 미친 사랑을 하게 해준 "+gf.name+"를 최종 선택하겠습니다!!");
+                System.out.println("\n축하합니다!\n나 김진욱은! 40 넘어서 미친 사랑을 하게 해준 "+gf.name+"을(를) 최종 선택하겠습니다!!");
                 System.out.println("나! 너 때문에 미칠것 같다!!! 나랑 살자!!!");
                 break;
             }
