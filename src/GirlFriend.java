@@ -1,4 +1,4 @@
-package com.example.myproject;
+
 public class GirlFriend extends Jinuk {
     int like;
 

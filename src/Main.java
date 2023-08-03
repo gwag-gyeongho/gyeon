@@ -1,5 +1,3 @@
-package com.example.myproject;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,6 +58,34 @@ public class Main {
         return selectedGirlFriend;
     }
 
+    public void handleChoice(Scanner scanner, GirlFriend selectedGF) {
+        String[] choices = {
+                "언제까지 그렇게 재실 건가요",
+                "사랑은 머리로 하는 게 아니라 가슴으로 하는 거거든요",
+                "얘기를 하지 말라!"
+        };
+        int choice = getChoice(scanner, choices);
+
+        switch (choice) {
+            case 1:
+                selectedGF.increaseLike(20);
+                break;
+            case 2:
+                selectedGF.increaseLike(30);
+                break;
+            case 3:
+                selectedGF.increaseLike(-5);
+                break;
+        }
+    }
+
+    public void startInteractions(Scanner scanner) {
+        while (true) {
+            GirlFriend selectedGF = selectGirlFriend(scanner);
+            handleChoice(scanner, selectedGF);
+        }
+    }
+
     public static void main(String[] args) {
         Main main = new Main();
         Jinuk jinuk = new Jinuk("진욱", 40, "개발자", "ENTP");
@@ -72,80 +98,14 @@ public class Main {
 
         main.printGirlFriendList();
 
-        // 선택지를 입력받아 호감도를 증가시키는 부분
         Scanner scanner = new Scanner(System.in);
         GirlFriend selectedGirlFriend = main.selectGirlFriend(scanner);
-
-        String[] choices = {
-                "언제까지 그렇게 재실 건가요",
-                "사랑은 머리로 하는 게 아니라 가슴으로 하는 거거든요",
-                "얘기를 하지 말라!"
-        };
-        int choice = main.getChoice(scanner, choices);
-
-        switch (choice) {
-            case 1:
-                selectedGirlFriend.increaseLike(20);
-                break;
-            case 2:
-                selectedGirlFriend.increaseLike(30);
-                break;
-            case 3:
-                selectedGirlFriend.increaseLike(-5);
-                break;
-        }
+        main.handleChoice(scanner, selectedGirlFriend);
 
         main.printGirlFriendList();
 
-        // 두 번째 선택을 하기
-        GirlFriend secondSelectedGirlFriend = main.selectGirlFriend(scanner);
+        main.startInteractions(scanner);
 
-        String[] secondChoices = {
-                "쿵할게요",
-                "내가 푼 문제의 정답은 너야",
-                "어이구 아가야!"
-        };
-        int secondChoice = main.getChoice(scanner, secondChoices);
-
-        switch (secondChoice) {
-            case 1:
-                secondSelectedGirlFriend.increaseLike(10);
-                break;
-            case 2:
-                secondSelectedGirlFriend.increaseLike(40);
-                break;
-            case 3:
-                secondSelectedGirlFriend.increaseLike(20);
-                break;
-        }
-
-        main.printGirlFriendList();
-
-        // 세 번째 선택을 하기
-        GirlFriend thirdSelectedGirlFriend = main.selectGirlFriend(scanner);
-
-        String[] thirdChoices = {
-                "파스타나 만들어 먹자",
-                "조곤조곤, 섹시한, 츤데레",
-                "내 드라마의 주인공은 너였어"
-        };
-        int thirdChoice = main.getChoice(scanner, thirdChoices);
-
-        switch (thirdChoice) {
-            case 1:
-                thirdSelectedGirlFriend.increaseLike(10);
-                break;
-            case 2:
-                thirdSelectedGirlFriend.increaseLike(20);
-                break;
-            case 3:
-                thirdSelectedGirlFriend.increaseLike(30);
-                break;
-        }
-
-        main.printGirlFriendList();
-
-        // 호감도가 100이 된 상대가 있는지 확인하고, 게임 종료 또는 최종 선택 진행
         boolean marriageSuccess = false;
         for (GirlFriend gf : main.girlFriendsList) {
             if (gf.like >= 100) {

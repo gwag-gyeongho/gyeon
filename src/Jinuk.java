@@ -1,4 +1,3 @@
-package com.example.myproject;
 
 public class Jinuk extends Person {
     String job;
